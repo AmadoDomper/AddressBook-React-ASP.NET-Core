@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { contactDTO } from "./contacts.model";
 import GenericList from "../utils/GenericList";
+import Button from "../utils/Buttons";
 
 export default function IndexContacts() {
   const [contacts, setContacts] = useState<contactDTO[]>();
@@ -31,7 +32,10 @@ export default function IndexContacts() {
           <tbody>
             {contacts?.map((contact) => (
               <tr key={contact.id}>
-                <td></td>
+                <td>
+                  <Button className="btn btn-success" onClick={() => console.log("do something")}>Edit</Button>
+                  <Button className="btn btn-danger">Delete</Button>
+                </td>
                 <td>{contact.name}</td>
                 <td>{contact.email}</td>
                 <td>{contact.phone}</td>
