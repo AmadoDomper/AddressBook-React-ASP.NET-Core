@@ -35,7 +35,7 @@ export default function IndexContacts() {
             {contacts?.map((contact) => (
               <tr key={contact.id}>
                 <td>
-                  <Link className="btn btn-success" to={`contacts/${contact.id}`}>Edit</Link>
+                  <Link className="btn btn-success" to={`contacts/edit/${contact.id}`}>Edit</Link>
                   <Button className="btn btn-danger" onClick={() => console.log("delete something...")}>Delete</Button>
                 </td>
                 <td>{contact.name}</td>
