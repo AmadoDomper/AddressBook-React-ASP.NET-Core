@@ -15,3 +15,7 @@ code {
 .table button, .table a{
   margin-right: 1rem;
 }
+
+form a{
+  margin-left: 1rem;
+}

@@ -5,23 +5,37 @@ import GenericList from "../utils/GenericList";
 import Button from "../utils/Buttons";
 import { Link } from "react-router-dom";
 import { urlContacts } from "../endpoints";
+import customConfirm from "../utils/customConfirm";
 
 export default function IndexContacts() {
   const [contacts, setContacts] = useState<contactDTO[]>();
 
   useEffect(() => {
+    loadData();
+  }, []);
+
+  function loadData(){
     axios
       .get(urlContacts)
       .then((response: AxiosResponse<contactDTO[]>) => {
         setContacts(response.data);
         console.log(response.data);
       });
-  }, []);
+  }
+
+  async function deleteGenre(id: number){
+    try{
+        await axios.delete(`${urlContacts}/${id}`);
+        loadData();
+    }catch(error){
+      console.log(error);
+    }
+  }
 
   return (
     <>
       <h3>Contacts</h3>
-      <Link className="btn btn-primary" to="/contacts/create">Create Contac</Link>
+      <Link className="btn btn-primary" to="/contacts/create">Create Contact</Link>
       <GenericList list={contacts}>
         <table className="table table-striped">
           <thead>
@@ -37,7 +51,7 @@ export default function IndexContacts() {
               <tr key={contact.id}>
                 <td>
                   <Link className="btn btn-success" to={`contacts/edit/${contact.id}`}>Edit</Link>
-                  <Button className="btn btn-danger" onClick={() => console.log("delete something...")}>Delete</Button>
+                  <Button className="btn btn-danger" onClick={() => customConfirm(() => deleteGenre(contact.id))}>Delete</Button>
                 </td>
                 <td>{contact.name}</td>
                 <td>{contact.email}</td>

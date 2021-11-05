@@ -16,6 +16,7 @@ export default function ContactForm(props: contactFormProps) {
           <Button disabled={formikPropis.isSubmitting} type="submit">
             Save Changes
           </Button>
+          
           <Link className="btn btn-secondary" to="/contacts">
             Cancel
           </Link>
