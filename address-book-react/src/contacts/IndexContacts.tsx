@@ -4,13 +4,14 @@ import { contactDTO } from "./contacts.model";
 import GenericList from "../utils/GenericList";
 import Button from "../utils/Buttons";
 import { Link } from "react-router-dom";
+import { urlContacts } from "../endpoints";
 
 export default function IndexContacts() {
   const [contacts, setContacts] = useState<contactDTO[]>();
 
   useEffect(() => {
     axios
-      .get("https://localhost:7211/api/contacts")
+      .get(urlContacts)
       .then((response: AxiosResponse<contactDTO[]>) => {
         setContacts(response.data);
         console.log(response.data);

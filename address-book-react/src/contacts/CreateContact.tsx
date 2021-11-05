@@ -2,13 +2,14 @@ import axios from "axios";
 import { useHistory } from "react-router";
 import ContactForm from "./ContactForm";
 import { contactCreationDTO } from "./contacts.model";
+import { urlContacts } from "../endpoints";
 
 export default function CreateContact() {
 const history = useHistory();
 
 async function create(contact: contactCreationDTO){
     try{
-        await axios.post("https://localhost:7211/api/contacts", contact);
+        await axios.post(urlContacts, contact);
         history.push('/contacts');
     }catch(error){
         console.error(error);

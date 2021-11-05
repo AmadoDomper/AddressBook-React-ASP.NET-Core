@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router";
 import Loading from "../utils/Loading";
 import ContactForm from "./ContactForm";
 import { contactCreationDTO, contactDTO } from "./contacts.model";
+import { urlContacts } from "../endpoints";
 
 export default function EditContact() {
   const { id }: any = useParams();
@@ -12,7 +13,7 @@ export default function EditContact() {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7211/api/contacts/${id}`)
+      .get(`${urlContacts}/${id}`)
       .then((response: AxiosResponse<contactDTO>) => {
         setContact(response.data);
         console.log(response.data);
@@ -22,7 +23,7 @@ export default function EditContact() {
   async function edit(contactToEdit: contactCreationDTO) {
     try {
       await axios.put(
-        `https://localhost:7211/api/contacts/${id}`,
+        `${urlContacts}${id}`,
         contactToEdit
       );
       history.push("/contacts");
