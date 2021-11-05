@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { contactDTO } from "./contacts.model";
 import GenericList from "../utils/GenericList";
 import Button from "../utils/Buttons";
+import { Link } from "react-router-dom";
 
 export default function IndexContacts() {
   const [contacts, setContacts] = useState<contactDTO[]>();
@@ -19,6 +20,7 @@ export default function IndexContacts() {
   return (
     <>
       <h3>Contacts</h3>
+      <Link className="btn btn-primary" to="/contacts/create">Create Contac</Link>
       <GenericList list={contacts}>
         <table className="table table-striped">
           <thead>
@@ -33,8 +35,8 @@ export default function IndexContacts() {
             {contacts?.map((contact) => (
               <tr key={contact.id}>
                 <td>
-                  <Button className="btn btn-success" onClick={() => console.log("do something")}>Edit</Button>
-                  <Button className="btn btn-danger">Delete</Button>
+                  <Link className="btn btn-success" to={`contacts/${contact.id}`}>Edit</Link>
+                  <Button className="btn btn-danger" onClick={() => console.log("delete something...")}>Delete</Button>
                 </td>
                 <td>{contact.name}</td>
                 <td>{contact.email}</td>

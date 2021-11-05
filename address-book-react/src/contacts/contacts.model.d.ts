@@ -4,3 +4,9 @@ export interface contactDTO{
     email: string,
     phone: string
 }
+
+export interface contactCreationDTO{
+    name: string,
+    email: string,
+    phone: string
+}

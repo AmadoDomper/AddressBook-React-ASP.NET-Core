@@ -12,6 +12,6 @@ code {
     monospace;
 }
 
-.table button{
+.table button, .table a{
   margin-right: 1rem;
 }
