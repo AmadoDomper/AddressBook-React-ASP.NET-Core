@@ -17,6 +17,15 @@ public class Startup
         services.AddSingleton<IRepository, InMemoryRepository>();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+
+        services.AddCors(options =>
+        {
+            var frontendURL = Configuration.GetValue<string>("frontend_url");
+            options.AddDefaultPolicy(builder =>
+            {
+                builder.WithOrigins(frontendURL).AllowAnyMethod().AllowAnyHeader();
+            });
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -31,6 +40,8 @@ public class Startup
         app.UseHttpsRedirection();
 
         app.UseRouting();
+
+        app.UseCors();
 
         app.UseAuthorization();
 
