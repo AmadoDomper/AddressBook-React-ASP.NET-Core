@@ -1,4 +1,6 @@
-﻿namespace AddressBookAPI;
+﻿using AddressBookAPI.Services;
+
+namespace AddressBookAPI;
 
 public class Startup
 {
@@ -12,6 +14,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
+        services.AddSingleton<IRepository, InMemoryRepository>();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
     }
@@ -22,7 +25,7 @@ public class Startup
         {
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AddressBookAPI v1"));
         }
 
         app.UseHttpsRedirection();
