@@ -21,5 +21,37 @@ namespace AddressBookAPI.Services
         {
             return _contacts;
         }
+
+        public Contact GetContact(int id)
+        {
+            return _contacts.FirstOrDefault(contact => contact.Id == id);
+        }
+
+        public void AddContact(Contact contact)
+        {
+            contact.Id = _contacts.Max(contact => contact.Id) + 1;
+            _contacts.Add(contact);
+        }
+
+        public void UpdateContact(Contact contact, int id)
+        {
+            var index = _contacts.FindIndex(contact => contact.Id == id);
+
+            if (index >= 0)
+            {
+                _contacts[index] = contact;
+            }
+        }
+
+        public void DeleteContact(int id)
+        {
+            var itemToRemove = _contacts.FirstOrDefault(contact => contact.Id == id);
+
+            if(itemToRemove != null)
+            {
+                _contacts.Remove(itemToRemove);
+            }
+            
+        }
     }
 }

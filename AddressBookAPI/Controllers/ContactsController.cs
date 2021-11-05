@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AddressBookAPI.Controllers
 {
     [Route("api/contacts")]
+    [ApiController]
     public class ContactsController : ControllerBase
     {
         private readonly IRepository _repository;
@@ -19,29 +20,34 @@ namespace AddressBookAPI.Controllers
             return _repository.GetAllContacts();
         }
 
-        [HttpGet("{Id:int}", Name = "getContact")]
-        public Contact Get(int Id)
+        [HttpGet("{id:int}", Name = "getContact")]
+        public Contact Get(int id)
         {
-            throw new NotImplementedException();
+            return _repository.GetContact(id);
         }
 
         [HttpPost]
-        public Task<ActionResult> Post([FromBody] Contact contact)
+        public  ActionResult Post(Contact contact)
         {
-            throw new NotImplementedException();
+             _repository.AddContact(contact);
+
+            return NoContent();
         }
 
 
-        [HttpPut]
-        public ActionResult Put()
+        [HttpPut("{id:int}")]
+        public ActionResult Put(Contact contact, int id)
         {
-            throw new NotImplementedException();
+            _repository.UpdateContact(contact, id);
+
+            return NoContent();
         }
 
-        [HttpDelete]
-        public ActionResult Delete()
+        [HttpDelete("{id:int}")]
+        public ActionResult Delete(int id)
         {
-            throw new NotImplementedException();
+            _repository.DeleteContact(id);
+            return NoContent();
         }
 
     }
