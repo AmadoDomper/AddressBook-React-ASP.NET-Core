@@ -1,4 +1,5 @@
-﻿using AddressBookAPI.Services;
+﻿using AddressBookAPI.Entities;
+using AddressBookAPI.Repositories;
 
 namespace AddressBookAPI;
 
@@ -14,7 +15,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
-        services.AddSingleton<IRepository, InMemoryRepository>();
+        services.AddSingleton<IRepository<Contact, int>, InMemoryRepository>();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 

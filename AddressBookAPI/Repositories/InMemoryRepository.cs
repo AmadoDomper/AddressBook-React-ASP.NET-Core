@@ -1,8 +1,8 @@
 ﻿using AddressBookAPI.Entities;
 
-namespace AddressBookAPI.Services
+namespace AddressBookAPI.Repositories
 {
-    public class InMemoryRepository : IRepository
+    public class InMemoryRepository : IRepository<Contact, int>
     {
         private List<Contact> _contacts;
         public InMemoryRepository()
@@ -17,23 +17,23 @@ namespace AddressBookAPI.Services
             };
         }
 
-        public List<Contact> GetAllContacts()
+        public List<Contact> GetAll()
         {
             return _contacts;
         }
 
-        public Contact GetContact(int id)
+        public Contact GetById(int id)
         {
             return _contacts.FirstOrDefault(contact => contact.Id == id);
         }
 
-        public void AddContact(Contact contact)
+        public void Insert(Contact contact)
         {
             contact.Id = _contacts.Max(contact => contact.Id) + 1;
             _contacts.Add(contact);
         }
 
-        public void UpdateContact(Contact contact, int id)
+        public void Update(Contact contact, int id)
         {
             var index = _contacts.FindIndex(contact => contact.Id == id);
 
@@ -43,15 +43,15 @@ namespace AddressBookAPI.Services
             }
         }
 
-        public void DeleteContact(int id)
+        public void Delete(int id)
         {
             var itemToRemove = _contacts.FirstOrDefault(contact => contact.Id == id);
 
-            if(itemToRemove != null)
+            if (itemToRemove != null)
             {
                 _contacts.Remove(itemToRemove);
             }
-            
+
         }
     }
 }

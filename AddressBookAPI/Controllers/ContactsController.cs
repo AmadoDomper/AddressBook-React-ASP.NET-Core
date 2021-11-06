@@ -1,5 +1,5 @@
 ﻿using AddressBookAPI.Entities;
-using AddressBookAPI.Services;
+using AddressBookAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AddressBookAPI.Controllers
@@ -8,8 +8,8 @@ namespace AddressBookAPI.Controllers
     [ApiController]
     public class ContactsController : ControllerBase
     {
-        private readonly IRepository _repository;
-        public ContactsController(IRepository repository)
+        private readonly IRepository<Contact, int> _repository;
+        public ContactsController(IRepository<Contact, int> repository)
         {
             _repository = repository;
         }
@@ -17,19 +17,19 @@ namespace AddressBookAPI.Controllers
         [HttpGet]
         public List<Contact> Get()
         {
-            return _repository.GetAllContacts();
+            return _repository.GetAll();
         }
 
         [HttpGet("{id:int}", Name = "getContact")]
         public Contact Get(int id)
         {
-            return _repository.GetContact(id);
+            return _repository.GetById(id);
         }
 
         [HttpPost]
         public  ActionResult Post(Contact contact)
         {
-             _repository.AddContact(contact);
+             _repository.Insert(contact);
 
             return NoContent();
         }
@@ -38,7 +38,7 @@ namespace AddressBookAPI.Controllers
         [HttpPut("{id:int}")]
         public ActionResult Put(Contact contact, int id)
         {
-            _repository.UpdateContact(contact, id);
+            _repository.Update(contact, id);
 
             return NoContent();
         }
@@ -46,7 +46,7 @@ namespace AddressBookAPI.Controllers
         [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
-            _repository.DeleteContact(id);
+            _repository.Delete(id);
             return NoContent();
         }
 
