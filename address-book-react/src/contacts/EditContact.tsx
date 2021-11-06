@@ -23,7 +23,7 @@ export default function EditContact() {
   async function edit(contactToEdit: contactCreationDTO) {
     try {
       await axios.put(
-        `${urlContacts}${id}`,
+        `${urlContacts}/${id}`,
         contactToEdit
       );
       history.push("/contacts");

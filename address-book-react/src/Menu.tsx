@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Menu(){
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container-fluid">
                 <NavLink className="navbar-brand" to="/">AddressBook 1.0</NavLink>
                 <div className="collapse navbar-collapse">

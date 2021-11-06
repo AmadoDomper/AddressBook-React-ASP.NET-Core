@@ -3,6 +3,9 @@ import './App.css';
 import Menu from './Menu';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import routes from './route-config';
+import configureValidations from './Validation';
+
+configureValidations();
 
 function App() {
   return (

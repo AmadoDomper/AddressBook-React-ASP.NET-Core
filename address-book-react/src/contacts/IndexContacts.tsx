@@ -35,10 +35,10 @@ export default function IndexContacts() {
   return (
     <>
       <h3>Contacts</h3>
-      <Link className="btn btn-primary" to="/contacts/create">Create Contact</Link>
+      <Link className="btn btn-primary mb-3" to="/contacts/create">Create Contact</Link>
       <GenericList list={contacts}>
         <table className="table table-striped">
-          <thead>
+          <thead className="table-light">
             <tr>
               <th>Actions</th>
               <th>Name</th>
