@@ -1,5 +1,7 @@
-﻿using AddressBookAPI.Entities;
+﻿using AddressBookAPI.DTOs;
+using AddressBookAPI.Entities;
 using AddressBookAPI.Repositories;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AddressBookAPI.Controllers
@@ -9,26 +11,32 @@ namespace AddressBookAPI.Controllers
     public class ContactsController : ControllerBase
     {
         private readonly IRepository<Contact, int> _repository;
-        public ContactsController(IRepository<Contact, int> repository)
+        private readonly IMapper mapper;
+
+        public ContactsController(IRepository<Contact, int> repository, IMapper mapper)
         {
             _repository = repository;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public List<Contact> Get()
+        public List<ContactDTO> Get()
         {
-            return _repository.GetAll();
+            var contacts = _repository.GetAll();
+            return mapper.Map<List<ContactDTO>>(contacts);
         }
 
         [HttpGet("{id:int}", Name = "getContact")]
-        public Contact Get(int id)
+        public ContactDTO Get(int id)
         {
-            return _repository.GetById(id);
+            var contact = _repository.GetById(id);
+            return mapper.Map<ContactDTO>(contact);
         }
 
         [HttpPost]
-        public  ActionResult Post(Contact contact)
+        public  ActionResult Post(ContactCreationDTO contactCreationDTO)
         {
+            var contact = mapper.Map<Contact>(contactCreationDTO);
              _repository.Insert(contact);
 
             return NoContent();
@@ -36,8 +44,9 @@ namespace AddressBookAPI.Controllers
 
 
         [HttpPut("{id:int}")]
-        public ActionResult Put(Contact contact, int id)
+        public ActionResult Put(ContactCreationDTO contactCreationDTO, int id)
         {
+            var contact = mapper.Map<Contact>(contactCreationDTO);
             _repository.Update(contact, id);
 
             return NoContent();

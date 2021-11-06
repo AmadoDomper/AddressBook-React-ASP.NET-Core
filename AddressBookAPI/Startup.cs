@@ -27,6 +27,8 @@ public class Startup
                 builder.WithOrigins(frontendURL).AllowAnyMethod().AllowAnyHeader();
             });
         });
+
+        services.AddAutoMapper(typeof(Startup));
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

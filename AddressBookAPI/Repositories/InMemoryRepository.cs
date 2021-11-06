@@ -24,28 +24,29 @@ namespace AddressBookAPI.Repositories
 
         public Contact GetById(int id)
         {
-            return _contacts.FirstOrDefault(contact => contact.Id == id);
+            return _contacts.FirstOrDefault(value => value.Id == id);
         }
 
         public void Insert(Contact contact)
         {
-            contact.Id = _contacts.Max(contact => contact.Id) + 1;
+            contact.Id = _contacts.Max(value => value.Id) + 1;
             _contacts.Add(contact);
         }
 
         public void Update(Contact contact, int id)
         {
-            var index = _contacts.FindIndex(contact => contact.Id == id);
+            var index = _contacts.FindIndex(value => value.Id == id);
 
             if (index >= 0)
             {
                 _contacts[index] = contact;
+                _contacts[index].Id = id;
             }
         }
 
         public void Delete(int id)
         {
-            var itemToRemove = _contacts.FirstOrDefault(contact => contact.Id == id);
+            var itemToRemove = _contacts.FirstOrDefault(value => value.Id == id);
 
             if (itemToRemove != null)
             {
