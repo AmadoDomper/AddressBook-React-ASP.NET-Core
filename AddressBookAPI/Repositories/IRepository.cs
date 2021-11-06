@@ -6,7 +6,7 @@ namespace AddressBookAPI.Repositories
     {
         List<TEntity> GetAll();
         TEntity GetById(T2 id);
-        void Insert(TEntity entity);
+        TEntity Insert(TEntity entity);
         void Delete(T2 id);
         void Update(TEntity entity, T2 id);
     }

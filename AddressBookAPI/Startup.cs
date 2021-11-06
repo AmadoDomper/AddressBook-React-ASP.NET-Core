@@ -14,7 +14,11 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers();
+        services.AddControllers().
+            ConfigureApiBehaviorOptions(options => 
+            {
+                options.SuppressMapClientErrors = true;
+            });
         services.AddSingleton<IRepository<Contact, int>, InMemoryRepository>();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();

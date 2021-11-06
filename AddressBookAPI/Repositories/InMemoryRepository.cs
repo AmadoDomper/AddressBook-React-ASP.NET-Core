@@ -27,10 +27,12 @@ namespace AddressBookAPI.Repositories
             return _contacts.FirstOrDefault(value => value.Id == id);
         }
 
-        public void Insert(Contact contact)
+        public Contact Insert(Contact contact)
         {
             contact.Id = _contacts.Max(value => value.Id) + 1;
             _contacts.Add(contact);
+
+            return contact;
         }
 
         public void Update(Contact contact, int id)

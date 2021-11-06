@@ -15,5 +15,6 @@ namespace AddressBookAPI.Entities
         [Required]
         [StringLength(20)]
         public string Phone { get; set; }
+        public string Street { get; set; }
     }
 }
