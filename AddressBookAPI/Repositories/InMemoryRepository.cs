@@ -29,7 +29,7 @@ namespace AddressBookAPI.Repositories
 
         public Contact Insert(Contact contact)
         {
-            contact.Id = _contacts.Max(value => value.Id) + 1;
+            contact.Id = _contacts.Max(value => (int?)value.Id).GetValueOrDefault() + 1;
             _contacts.Add(contact);
 
             return contact;
